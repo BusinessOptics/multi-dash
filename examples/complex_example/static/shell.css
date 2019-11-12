@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+}
+
+#content-frame {
+  flex-grow: 1;
+  margin-left: 40px;
+}
+
+#sidebar {
+  position: absolute;
+  width: 300px;
+  background: grey;
+  height: 100%;
+}
+
+#sidebar.collapsed {
+  width: 40px;
+}

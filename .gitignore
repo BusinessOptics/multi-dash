@@ -1,0 +1,14 @@
+__pycache__
+*.pyc
+
+.vscode
+.pytest_cache/*
+
+node_modules
+
+venv
+.env
+
+multi_dash.egg-info
+pip-wheel-metadata
+dist

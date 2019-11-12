@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Dash</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='shell.css') }}"/>
+  </head>
+
+  <body>
+   
+   <div id="sidebar">
+      <div id="toggle">
+      Menu
+      </div>
+      {% for page in pages %}    
+      <a href="{{ page.url }}" data-page-slug="{{page.slug}}">
+        {{ page.title }}
+      </a>
+      {% endfor %}
+    </div>
+    
+    <header>
+      <h1 id = "page-title">{{selected_page.title}}</h1>
+    </header>
+   
+   
+   <iframe id="content-frame" src="{{ selected_page.page_url }}"></iframe>
+   
+    <script>
+      window.dashboards = {{ pages|tojson }};
+      
+      {% include "multi_dash/inline_scripts.js" %} 
+      
+      // Toggle The Menu
+      function toggleLayout() {
+        document
+          .getElementById("sidebar")
+          .classList.toggle("contracted");
+      }
+      document.getElementById("toggle").addEventListener("click", toggleLayout);
+
+
+    </script>
+
+  </body>
+</html>
