@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "multi-dash"
-version = "0.1.0"
+version = "0.2.0"
 description = "A light framework to make multi-page dash based apps."
 authors = ["James Saunders <james@businessoptics.biz>"]
 license = "MIT"
