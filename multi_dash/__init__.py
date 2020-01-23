@@ -49,7 +49,15 @@ class MultiDash:
             self.template, pages=self.pages, selected_page=selected_page
         )
 
-    def register_dash(self, module_name, title, slug=None, icon=None):
+    def register_dash(
+        self,
+        module_name,
+        title,
+        slug=None,
+        icon=None,
+        ignore_default_stylesheets=False,
+        hide_in_menu=False,
+    ):
         """
         Example usage:
 
@@ -62,13 +70,15 @@ class MultiDash:
 
         def factory(name, **kwargs):
             external_stylesheets = kwargs.pop("external_stylesheets", [])
+            if not ignore_default_stylesheets:
+                external_stylesheets = (
+                    external_stylesheets + self.default_dash_stylesheets
+                )
             return dash.Dash(
                 name,
                 server=self.server,
                 url_base_pathname=f"{page_url}/",
-                external_stylesheets=(
-                    external_stylesheets + self.default_dash_stylesheets
-                ),
+                external_stylesheets=external_stylesheets,
                 **kwargs,
             )
 
@@ -82,6 +92,7 @@ class MultiDash:
                 icon=icon,
                 page_url=page_url,
                 url=url,
+                hide_in_menu=hide_in_menu,
             )
         )
 
@@ -98,9 +109,11 @@ class MultiDash:
                 page_url=page_url,
                 url=url,
                 slug=slug,
+                hide_in_menu=False,
             )
         )
         return self
 
     def register_health(self, url):
         self.server.route(url)(lambda: "healthy")
+        return self
